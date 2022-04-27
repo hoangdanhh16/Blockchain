@@ -1,0 +1,15 @@
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\Console_App.exe
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\Console_App.deps.json
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\Console_App.runtimeconfig.json
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\Console_App.dll
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\ref\Console_App.dll
+D:\Blockchain\Source\Console_App\Console_App\bin\Debug\net6.0\Console_App.pdb
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.csproj.AssemblyReference.cache
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.GeneratedMSBuildEditorConfig.editorconfig
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.AssemblyInfoInputs.cache
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.AssemblyInfo.cs
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.csproj.CoreCompileInputs.cache
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.dll
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\ref\Console_App.dll
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.pdb
+D:\Blockchain\Source\Console_App\Console_App\obj\Debug\net6.0\Console_App.genruntimeconfig.cache

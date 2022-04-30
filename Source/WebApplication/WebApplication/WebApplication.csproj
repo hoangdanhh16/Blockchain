@@ -151,8 +151,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MyHub1.cs" />
-    <Compile Include="Models\MyModule1.cs" />
+    <Compile Include="Models\Block.cs" />
+    <Compile Include="Models\BlockChain.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

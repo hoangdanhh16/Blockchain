@@ -56,7 +56,7 @@ namespace WebApplication.Models
             double balance = 0;
             foreach(Block block in Chain)
             {
-                foreach(Transaction transaction in block.Transactions)
+                foreach(Transaction transaction in block.transactions)
                 {
                     if(transaction.From == address)
                     {
@@ -77,12 +77,12 @@ namespace WebApplication.Models
             return new Block(DateTime.Now, transactions, "0");
         }
 
-        public String PrintChain(BlockChain blockChain)
+        public String PrintChain()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("----------------- Start Blockchain -----------------\r\n");
             builder.Append("\n");
-            foreach (Block block in blockChain.Chain)
+            foreach (Block block in this.Chain)
             {
                 Console.WriteLine("** 1 block exist **");
                 builder.Append("\n");
@@ -94,7 +94,7 @@ namespace WebApplication.Models
                 builder.Append(block.PreviousHash);
                 builder.Append("\n");
                 builder.Append("--- Start Transactions ---\n");
-                foreach (Transaction transaction in block.Transactions)
+                foreach (Transaction transaction in block.transactions)
                 {
                     builder.Append("From: ");
                     builder.Append(transaction.From);
@@ -112,18 +112,18 @@ namespace WebApplication.Models
             return res;
         }
 
-        public List<string> GetChainInfor(BlockChain blockChain)
+        public List<string> GetChainInfor()
         {
             List<string> ls = new List<string>();
             ls.Add("----------------- Start Blockchain -----------------");
-            foreach (Block block in blockChain.Chain)
+            foreach (Block block in this.Chain)
             {
                 ls.Add("\n");
                 ls.Add("------ Start Block ------");
                 ls.Add("Hash: " + block.Hash);
                 ls.Add("Previous Hash: " + block.PreviousHash);
                 ls.Add("--- Start Transactions ---");
-                foreach (Transaction transaction in block.Transactions)
+                foreach (Transaction transaction in block.transactions)
                 {
                     ls.Add("From: " + transaction.From + " To " + transaction.To + " Amount " + transaction.Amount.ToString());
                 }
@@ -134,17 +134,40 @@ namespace WebApplication.Models
             return ls;
         }
 
-        public List<string> GetChainTransaction(BlockChain blockChain)
+        public List<string> GetChainTransaction()
         {
             List<string> ls = new List<string>();
-            foreach (Block block in blockChain.Chain)
+            foreach (Block block in this.Chain)
             {
-                foreach (Transaction transaction in block.Transactions)
+                foreach (Transaction transaction in block.transactions)
                 {
                     ls.Add("[" + transaction.From + "] đã chuyển cho [" + transaction.To + "] số tiền " + transaction.Amount.ToString() + " (VHDCOIN)");
                 }
             }
             return ls;
+        }
+
+        public List<List<string>> GetHomeInfor()
+        {
+            List<List<string>> lsAll = new List<List<string>>();
+            int i = 0;
+
+            foreach (Block block in this.Chain)
+            {
+                List<string> lsTemp = new List<string>();
+                lsTemp.Add("Block #" + i.ToString());
+                lsTemp.Add("Hash: " + block.Hash);
+                lsTemp.Add("Previous Hash: " + block.PreviousHash);
+                lsTemp.Add("Transaction:");
+                foreach (Transaction transaction in block.transactions)
+                {
+                    lsTemp.Add("From: " + transaction.From + " To " + transaction.To + " Amount " + transaction.Amount.ToString());
+                }
+                i++;
+                lsAll.Add(lsTemp);
+            }
+
+            return lsAll;
         }
     }
 }

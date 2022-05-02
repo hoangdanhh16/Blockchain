@@ -15,14 +15,28 @@ namespace WebApplication.Controllers
         const string adminAddress = "admin";
         const string user1Address = "user1";
         const string user2Address = "user2";
-        private BlockChain blockChain = new BlockChain(proofOfWorkDifficulty: 2, miningReward: 10);
 
-        public ActionResult Index()
+        // không dùng static thì mỗi khi gọi actionResult biến blockChain sẽ bị reset về chain rỗng (1 block gốc)
+        private static BlockChain blockChain = new BlockChain(proofOfWorkDifficulty: 2, miningReward: 10);
+        private static bool isLoaded = false; // chưa load -> true thì không load lại
+
+        public void Load()
         {
             blockChain.CreateTransaction(new Transaction(adminAddress, user1Address, 200));
             blockChain.CreateTransaction(new Transaction(adminAddress, user2Address, 200));
             blockChain.MineBlock(minerAddress);
-            ViewBag.ChainContent = blockChain.GetChainInfor(blockChain);
+        }
+
+        public ActionResult Index()
+        {
+            // Index sẽ là nơi vào đầu tiên
+            if (!isLoaded) // chưa được load (!false => true)
+            {
+                this.Load();
+                isLoaded = true;
+            }
+
+            ViewBag.ChainContent = blockChain.GetChainTransaction(blockChain);
 
             return View();
         }
@@ -43,12 +57,13 @@ namespace WebApplication.Controllers
         }
         public ActionResult History()
         {
+            ViewBag.AllTransaction = blockChain.GetChainTransaction(blockChain);
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Ví điện tử demo.";
+            ViewBag.Message = "Ví điện tử demo";
 
             return View();
         }

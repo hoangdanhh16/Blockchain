@@ -133,5 +133,18 @@ namespace WebApplication.Models
             ls.Add("----------------- End Blockchain -----------------\n");
             return ls;
         }
+
+        public List<string> GetChainTransaction(BlockChain blockChain)
+        {
+            List<string> ls = new List<string>();
+            foreach (Block block in blockChain.Chain)
+            {
+                foreach (Transaction transaction in block.Transactions)
+                {
+                    ls.Add("[" + transaction.From + "] đã chuyển cho [" + transaction.To + "] số tiền " + transaction.Amount.ToString() + " (VHDCOIN)");
+                }
+            }
+            return ls;
+        }
     }
 }

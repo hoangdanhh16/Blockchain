@@ -114,5 +114,15 @@ namespace WebApplication.Controllers
                 return View("Login");
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            acc = "";
+            ViewBag.Acc = acc;
+            ViewBag.status = "";
+            return View("Login");
+        }
     }
 }

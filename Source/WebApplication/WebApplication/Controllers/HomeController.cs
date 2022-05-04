@@ -20,13 +20,12 @@ namespace WebApplication.Controllers
         // không dùng static thì mỗi khi gọi actionResult biến blockChain sẽ bị reset về chain rỗng (1 block gốc)
         private static BlockChain blockChain = new BlockChain(proofOfWorkDifficulty: 2, miningReward: 10);
         private static bool isLoaded = false; // chưa load -> true thì không load lại
-        private static List<string> walletList = new List<string>() { adminAddress, user1Address, user1Address }; // khởi đầu với 3 ví
+        private static List<string> walletList = new List<string>() { adminAddress, user1Address, user2Address }; // khởi đầu với 3 ví
         private static List<string> passwordList = new List<string>() { "admin", "user1", "user2" };
         private static string acc = ""; // tên ví, rỗng là chưa đăng nhập
 
         public void Load()
         {
-            blockChain.CreateTransaction(new Transaction(adminAddress, user1Address, 200));
             blockChain.CreateTransaction(new Transaction(adminAddress, user2Address, 200));
             blockChain.MineBlock(minerAddress);
             blockChain.CreateTransaction(new Transaction(adminAddress, user1Address, 20));
@@ -99,8 +98,48 @@ namespace WebApplication.Controllers
 
         public ActionResult Transfer()
         {
+            ViewBag.Acc = acc;
+            ViewBag.status = "";
+
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TransferClick(WalletTransactions wallTrans)
+        {
+            if (!walletList.Contains(wallTrans.walletname))
+            {
+                ViewBag.Acc = acc;
+                ViewBag.status = "Ví đích không tồn tại!";
+
+                return View();
+            }
+            else
+            {
+                var mon = int.Parse(wallTrans.money);
+                var balance = blockChain.GetBalance(acc);
+
+                if (balance <= mon)
+                {
+                    ViewBag.Acc = acc;
+                    ViewBag.status = "Số tiền chuyển không thể vượt quá số tiền trong ví" + " (" + balance.ToString() + " VCOIN) !";
+
+                    return View();
+                }
+                else
+                {
+                    blockChain.CreateTransaction(new Transaction(acc, wallTrans.walletname, mon));
+                    blockChain.MineBlock(minerAddress);
+
+                    ViewBag.AllChainContent = blockChain.GetHomeInfor();
+
+                    return View("Index");
+                }
+            }
+        }
+
+
         public ActionResult History()
         {
             ViewBag.AllTransaction = blockChain.GetChainTransaction();

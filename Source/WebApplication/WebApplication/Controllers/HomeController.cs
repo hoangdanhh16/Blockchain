@@ -44,14 +44,14 @@ namespace WebApplication.Controllers
 
             ViewBag.AllChainContent = blockChain.GetHomeInfor();
 
-            return View();
+            return View("Index");
         }
 
         public ActionResult CreateWallet()
         {
             ViewBag.status = "";
             ViewBag.Acc = acc;
-            return View();
+            return View("CreateWallet");
         }
 
         [HttpPost]
@@ -101,7 +101,7 @@ namespace WebApplication.Controllers
             ViewBag.Acc = acc;
             ViewBag.status = "";
 
-            return View();
+            return View("Transfer");
         }
 
         [HttpPost]
@@ -113,7 +113,7 @@ namespace WebApplication.Controllers
                 ViewBag.Acc = acc;
                 ViewBag.status = "Ví đích không tồn tại!";
 
-                return View();
+                return View("Transfer");
             }
             else
             {
@@ -125,7 +125,7 @@ namespace WebApplication.Controllers
                     ViewBag.Acc = acc;
                     ViewBag.status = "Số tiền chuyển không thể vượt quá số tiền trong ví" + " (" + balance.ToString() + " VCOIN) !";
 
-                    return View();
+                    return View("Transfer");
                 }
                 else
                 {
@@ -143,14 +143,14 @@ namespace WebApplication.Controllers
         public ActionResult History()
         {
             ViewBag.AllTransaction = blockChain.GetChainTransaction();
-            return View();
+            return View("History");
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Ví điện tử demo";
 
-            return View();
+            return View("About");
         }
 
         public ActionResult Login()
@@ -158,7 +158,7 @@ namespace WebApplication.Controllers
             ViewBag.Acc = acc;
             ViewBag.status = "";
 
-            return View();
+            return View("Login");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -141,7 +141,11 @@ namespace WebApplication.Models
             {
                 foreach (Transaction transaction in block.transactions)
                 {
-                    ls.Add("[" + transaction.From + "] đã chuyển cho [" + transaction.To + "] số tiền " + transaction.Amount.ToString() + " (VHDCOIN)");
+                    //ls.Add("[" + transaction.From + "] đã chuyển cho [" + transaction.To + "] số tiền " + transaction.Amount.ToString() + " (VHDCOIN)");
+                    if (transaction.To.Contains("miner"))
+                        ls.Add("[" + transaction.To + "] đã nhận được " + transaction.Amount.ToString() + " (VHDCOIN)");
+                    else
+                        ls.Add("[" + transaction.From + "] đã chuyển cho [" + transaction.To + "] số tiền " + transaction.Amount.ToString() + " (VHDCOIN)");
                 }
             }
             return ls;

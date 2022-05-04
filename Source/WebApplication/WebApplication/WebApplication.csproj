@@ -155,6 +155,7 @@
     <Compile Include="Models\BlockChain.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WalletTransactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

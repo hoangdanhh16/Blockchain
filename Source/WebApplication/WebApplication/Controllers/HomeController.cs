@@ -123,7 +123,7 @@ namespace WebApplication.Controllers
                 if (balance <= mon)
                 {
                     ViewBag.Acc = acc;
-                    ViewBag.status = "Số tiền chuyển không thể vượt quá số tiền trong ví" + " (" + balance.ToString() + " VCOIN) !";
+                    ViewBag.status = "Số tiền chuyển không thể vượt quá số tiền trong ví" + " (" + balance.ToString() + " VHDCOIN) !";
 
                     return View("Transfer");
                 }
